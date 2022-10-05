@@ -15,7 +15,7 @@ import Main from './pages/Main/Main';
 const Router = () => {
   return (
     <BrowserRouter>
-      <Nav />
+      {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<SignUp />} />
@@ -27,7 +27,7 @@ const Router = () => {
         <Route path="/creatorcenter" element={<CreatorCenter />} />
         <Route path="/lecturevideo" element={<LectureVideo />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };
