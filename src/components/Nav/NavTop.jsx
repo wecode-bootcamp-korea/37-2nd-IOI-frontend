@@ -6,7 +6,7 @@ import { FaRegHeart } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
 import { FaChevronDown } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
-import SubscribeModal from '../SubscribeModal/SubscribeModal';
+import Subscribe from '../../pages/Subscribe/Subscribe';
 import ProfileModal from './ProfileModal';
 
 function NavTop() {
@@ -19,11 +19,12 @@ function NavTop() {
       <Nav>
         <WrapInfo>
           <Logo>IOI</Logo>
-          <Subscribe onClick={() => setSubscribeModalOpen(prev => !prev)}>
+          <GoSubscribe onClick={() => setSubscribeModalOpen(prev => !prev)}>
             구독
-          </Subscribe>
+          </GoSubscribe>
           <Modal
             isOpen={subscribeModalOpen}
+            ariaHideApp={false}
             onRequestClose={() => setSubscribeModalOpen(prev => !prev)}
             style={subscribeModal}
             preventScroll={true}
@@ -34,7 +35,7 @@ function NavTop() {
               document.body.style.overflow = 'scroll';
             }}
           >
-            <SubscribeModal />
+            <Subscribe />
             <CloseBtn onClick={() => setSubscribeModalOpen(prev => !prev)}>
               x
             </CloseBtn>
@@ -49,14 +50,12 @@ function NavTop() {
           <StyledLink to="/creatorcenter">
             <HeaderLink>크리에이터 센터</HeaderLink>
           </StyledLink>
-          <WrapProfile onClick={() => setProfileModalOpen(prev => !prev)}>
-            <FaUserCircle size="28" className="icon-user" />
-            <FaChevronDown size="15" />
-          </WrapProfile>
           {accessToken ? (
-            <WrapProfile onClick={() => setProfileModalOpen(prev => !prev)}>
-              <FaUserCircle size="28" className="icon-user" />
-              <FaChevronDown size="15" />
+            <>
+              <WrapProfile onClick={() => setProfileModalOpen(prev => !prev)}>
+                <FaUserCircle size="28" className="icon-user" />
+                <FaChevronDown size="15" />
+              </WrapProfile>
               <Modal
                 isOpen={profileModalOpen}
                 style={profileModal}
@@ -64,7 +63,7 @@ function NavTop() {
               >
                 <ProfileModal />
               </Modal>
-            </WrapProfile>
+            </>
           ) : (
             <StyledLink to="/login">
               <HeaderLink>로그인</HeaderLink>
@@ -150,14 +149,14 @@ const Logo = styled.h1`
   font-weight: bold;
 `;
 
-const Subscribe = styled.span`
+const GoSubscribe = styled.span`
   margin-right: 15px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 `;
 
-const Store = styled(Subscribe)`
+const Store = styled(GoSubscribe)`
   margin-right: 30px;
 `;
 
