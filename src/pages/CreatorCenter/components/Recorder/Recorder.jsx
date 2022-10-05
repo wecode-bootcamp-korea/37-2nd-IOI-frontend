@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
+// import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import styled from 'styled-components';
 import VideoInfo from './components/VideoInfo';
 import { useNavigate } from 'react-router-dom';
@@ -49,9 +49,9 @@ function Recorder({ searchParams, setSearchParams }) {
   };
 
   const recordDownloader = async () => {
-    const ffmpeg = createFFmpeg({
-      log: true,
-    });
+    // const ffmpeg = createFFmpeg({
+    //   log: true,
+    // });
     // await ffmpeg.load();
     // ffmpeg.FS('writeFile', 'recording.webm', await fetchFile(videoFile));
     // await ffmpeg.run('-i', 'recording.webm', 'r', '60', 'output.mp4');

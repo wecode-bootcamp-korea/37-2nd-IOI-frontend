@@ -5,6 +5,7 @@ import Router from './Router';
 import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import variables from './styles/variables';
+import Modal from 'react-modal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,3 +14,5 @@ root.render(
     <Router />
   </ThemeProvider>
 );
+
+Modal.setAppElement('#root');
