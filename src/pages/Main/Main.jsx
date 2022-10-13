@@ -8,6 +8,7 @@ import {
   MAIN_CATEGORY,
   SUB_CATEGORY,
 } from './components/FilterAndSort/CategoryData';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function Main() {
   const Token = localStorage.getItem('Token');
@@ -26,20 +27,21 @@ function Main() {
     setSearchParams(searchParams);
 
     if (Token) {
-      fetch(`http://10.58.52.168:3000/likes/getList`, {
+      fetch(`${BASE_URL}/likes/getList`, {
         headers: {
           authorization: Token,
         },
       })
         .then(res => res.json())
         .then(data => {
+          console.log('data.message : ', data.message);
           setLikedList(data.message);
         });
     }
   }, []);
 
   useEffect(() => {
-    fetch(`http://10.58.52.225:3000/main?${fetchURL}`)
+    fetch(`${BASE_URL}/main?${fetchURL}`)
       .then(res => res.json())
       .then(data => {
         setClassList(data.getFilter);
@@ -106,7 +108,7 @@ function Main() {
         {classList.length > 0 &&
           classList.map(
             ({
-              id,
+              classId,
               thumbnail_image,
               creatorName,
               classTitle,
@@ -115,8 +117,8 @@ function Main() {
             }) => {
               return (
                 <ClassList
-                  key={id}
-                  classId={id}
+                  key={classId}
+                  classId={classId}
                   thumbnail_image={thumbnail_image}
                   creator={creatorName}
                   classTitle={classTitle}

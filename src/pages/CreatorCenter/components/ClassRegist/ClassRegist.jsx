@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ClassBasicInfo from './components/ClassBasicInfo';
 import ClassDetailInfo from './components/ClassDetailInfo';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function ClassRegist({ currentClass, detailFlag }) {
   const [classInfo, setClassInfo] = useState({
@@ -18,11 +19,10 @@ function ClassRegist({ currentClass, detailFlag }) {
 
   const navigate = useNavigate();
   const classRegistForm = useRef();
-  const accessToken = localStorage.getItem('token');
+  const accessToken = localStorage.getItem('Token');
 
   const date = new Date(+new Date() + 3240 * 10000).toISOString().split('T')[0];
   const time = new Date().toTimeString().split(' ')[0];
-
   useEffect(() => {
     if (detailFlag) {
       setClassInfo(currentClass);
@@ -39,12 +39,11 @@ function ClassRegist({ currentClass, detailFlag }) {
     }
 
     const classForm = new FormData(classRegistForm.current);
-    fetch(`http://10.58.52.168:3000/classes/class`, {
+    fetch(`${BASE_URL}/classes/class`, {
       method: 'POST',
       headers: {
         enctype: 'multipart/form-data',
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE2NjU1NDkyNTN9.sMNrT8dL5pYAuAKFi3HTPzd9b51xvXJEbZmYANxxrxM',
+        authorization: accessToken,
       },
       body: classForm,
     }).then(response => {

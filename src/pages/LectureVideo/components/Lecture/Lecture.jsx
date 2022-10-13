@@ -11,7 +11,7 @@ function Lecture({ selectedLecture }) {
 
   return (
     <LectureContainer>
-      <Video videoSrc={videoSrc} />
+      <Video videoSrc={selectedLecture?.video_url} />
       <Title>{selectedLecture?.videoTitle}</Title>
       <Description>{selectedLecture?.videoDescription}</Description>
     </LectureContainer>

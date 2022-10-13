@@ -1,10 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { FaChevronRight } from 'react-icons/fa';
 
-function ProfileModal() {
+function ProfileModal({ setProfileModalOpen }) {
+  const navigate = useNavigate();
+
+  const logoutYes = () => {
+    localStorage.clear();
+    // navigate('/?limit=4&offset=0');
+    setProfileModalOpen(prev => !prev);
+  };
+
   return (
     <ProfileContainer>
       <UserContainer>
@@ -19,7 +27,7 @@ function ProfileModal() {
           </StyledLink>
         </UserBox>
       </UserContainer>
-      <Logout>로그아웃</Logout>
+      <Logout onClick={logoutYes}>로그아웃</Logout>
     </ProfileContainer>
   );
 }

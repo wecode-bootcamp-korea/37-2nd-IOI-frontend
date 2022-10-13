@@ -2,29 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import variables from '../../../../../styles/variables';
 
-function ListItem({
-  ListItem: { id, title, description, time, viewCount },
-  searchParams,
-  setSearchParams,
-  setVideoId,
-}) {
+function ListItem({ listItem, searchParams, setSearchParams, setVideoId }) {
   const goToLecture = () => {
-    searchParams.set('videoId', id);
+    searchParams.set('videoId', listItem?.id);
     setSearchParams(searchParams);
-    setVideoId(id);
+    setVideoId(listItem?.id);
   };
 
   return (
     <ItmeContainer onClick={goToLecture}>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Title>{listItem?.videoTitle}</Title>
+      <Description>{listItem?.videoDescription}</Description>
       <Time>
         <Img src="https://cdn-icons-png.flaticon.com/512/5910/5910421.png" />
-        <Text>{time}</Text>
+        <Text>{listItem?.time}</Text>
       </Time>
       <ViewCount>
         <Img src="https://cdn-icons-png.flaticon.com/512/5618/5618479.png" />
-        <Text>{viewCount}</Text>
+        <Text>{listItem?.viewCount}</Text>
       </ViewCount>
     </ItmeContainer>
   );

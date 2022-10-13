@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MOCK from '../Main/components/MainContent/components/ClassList/mockData/classLists';
 import ClassRegist from '../ClassRegist/ClassRegist';
 import VideoList from './components/VideoList/VideoList';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function ClassDetail() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,7 +15,7 @@ function ClassDetail() {
   const detailFlag = true;
 
   useEffect(() => {
-    fetch(`http://10.58.52.168:3000/classes/admin/${currentClassId}`)
+    fetch(`${BASE_URL}/classes/admin/${currentClassId}`)
       .then(response => {
         return response.json();
       })

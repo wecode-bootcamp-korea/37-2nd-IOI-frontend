@@ -12,7 +12,6 @@ function Subscribe() {
           구독하시겠습니까?
         </Title>
       </div>
-      <CancelBtn>X</CancelBtn>
       <SubscribeBox>
         <Tag>New</Tag>
         <DetailBox>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { FaRegHeart } from 'react-icons/fa';
@@ -12,13 +12,19 @@ import ProfileModal from './ProfileModal';
 function NavTop() {
   const [subscribeModalOpen, setSubscribeModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem('Token');
+
+  const navigate = useNavigate();
+
+  const goToHome = () => {
+    navigate('/?limit=4&offset=0');
+  };
 
   return (
     <Header>
       <Nav>
         <WrapInfo>
-          <Logo>IOI</Logo>
+          <Logo onClick={goToHome}>IOI</Logo>
           <GoSubscribe onClick={() => setSubscribeModalOpen(prev => !prev)}>
             구독
           </GoSubscribe>
@@ -61,7 +67,7 @@ function NavTop() {
                 style={profileModal}
                 onRequestClose={() => setProfileModalOpen(prev => !prev)}
               >
-                <ProfileModal />
+                <ProfileModal setProfileModalOpen={setProfileModalOpen} />
               </Modal>
             </>
           ) : (
@@ -147,6 +153,7 @@ const Logo = styled.h1`
   display: inline-block;
   font-size: 30px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const GoSubscribe = styled.span`
@@ -201,6 +208,7 @@ const HeaderLink = styled.span`
 `;
 
 const StyledLink = styled(Link)`
+  color: black;
   text-decoration: none;
 
   &:focus,

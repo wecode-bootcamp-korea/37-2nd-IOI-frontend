@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Likeproducts from './components/Likeproducts';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function MyPage() {
   const [likeList, setLikeList] = useState([]);
@@ -11,6 +12,8 @@ function MyPage() {
   const HandleLogout = () => {
     localStorage.removeItem('Token');
   };
+
+  const token = localStorage.getItem('Token');
 
   const settings = {
     dots: false,
@@ -23,9 +26,9 @@ function MyPage() {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.168:3000/likes/getList', {
+    fetch(`${BASE_URL}/likes/getList`, {
       headers: {
-        authorization: process.env.REACT_APP_SERVER_TOKEN,
+        authorization: token,
       },
     })
       .then(res => res.json())
