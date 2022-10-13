@@ -1,0 +1,21 @@
+{
+  "classes": {
+    "classId": 1,
+    "classTitle": "아이패드 하나로 기록하는 키츠의 아날로그 텍스처 일상",
+    "price": 54000.0,
+    "subCategory": "일러스트",
+    "coverImage": "https://images.pexels.com/photos/262034/pexels-photo-262034.jpeg?cs=srgb&dl=pexels-pixabay-262034.jpg&fm=jpg",
+    "coverGallery": [
+      "https://images.pexels.com/photos/2351865/pexels-photo-2351865.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/3112/art-brush-painting-colors.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/7859481/pexels-photo-7859481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    "classLevel": "입문자",
+    "like_count": 530,
+    "classIntroduce": "입문자분들을 위한 아이패드 드로잉 클래스입니다.",
+    "content": "어쩌구저쩌구 블라블라 그렇다 저렇다 이렇다 좋다",
+    "creatorName": "나다나",
+    "about_creater": "하이 나는 누구다 돈 내고 사봐라",
+    "profile_image": "https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_1280.jpg"
+  }
+}

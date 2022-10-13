@@ -16,20 +16,20 @@ import Main from './pages/Main/Main';
 const Router = () => {
   return (
     <BrowserRouter>
-      {/* <Nav /> */}
+      <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/kakaologin" element={<KakaoLogin />} />
         <Route path="/subscribe" element={<Subscribe />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/classes/detail/:id" element={<Detail />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/creatorcenter" element={<CreatorCenter />} />
         <Route path="/lecturevideo" element={<LectureVideo />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 };

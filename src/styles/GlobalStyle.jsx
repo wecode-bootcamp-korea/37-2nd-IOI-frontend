@@ -6,6 +6,10 @@ ${reset}
   * {
     box-sizing: border-box;
   }
+
+  button {
+    border: none;
+  }
 `;
 
 export default GlobalStyle;

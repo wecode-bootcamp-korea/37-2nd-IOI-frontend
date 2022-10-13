@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import VideoInfo from './components/VideoInfo';
 import { useNavigate } from 'react-router-dom';
-
 function Recorder({ searchParams, setSearchParams }) {
   const preview = useRef();
   const downloader = useRef();
@@ -11,14 +10,10 @@ function Recorder({ searchParams, setSearchParams }) {
   let streamForRecord;
   let recorder;
   let videoFile;
-
   const accessToken = localStorage.getItem('token');
   const currentClassId = searchParams.get('classId');
   const currentVideoId = searchParams.get('videoId');
   const navigate = useNavigate();
-
-  console.log('currentVideoId : ', currentVideoId);
-
   navigator.mediaDevices
     .getUserMedia({
       video: true,
@@ -30,7 +25,6 @@ function Recorder({ searchParams, setSearchParams }) {
       video.srcObject = stream;
       video.play();
     });
-
   const recordStarter = () => {
     console.log('녹화시작');
     let video = preview.current;
@@ -44,12 +38,10 @@ function Recorder({ searchParams, setSearchParams }) {
     };
     recorder.start();
   };
-
   const recordStopoer = () => {
     console.log('녹화종료');
     recorder.stop();
   };
-
   const recordDownloader = async () => {
     const a = document.createElement('a');
     a.href = videoFile;
@@ -57,12 +49,9 @@ function Recorder({ searchParams, setSearchParams }) {
     document.body.appendChild(a);
     a.click();
   };
-
   const lectureSubmit = event => {
     event.preventDefault();
-
     const videoForm = new FormData(videoRegistForm.current);
-
     if (currentVideoId) {
       console.log('edit');
       fetch(`http://10.58.52.97:3000/video?videoId=${currentVideoId}`, {
@@ -96,7 +85,6 @@ function Recorder({ searchParams, setSearchParams }) {
       });
     }
   };
-
   return (
     <RecorderContainer>
       <Video ref={preview} />
@@ -116,14 +104,12 @@ function Recorder({ searchParams, setSearchParams }) {
           currentVideoId={currentVideoId}
           recordingFlag={recordingFlag}
         />
-
         <Input name="classId" defaultValue={currentClassId} />
         <Input name="videoId" defaultValue={currentVideoId} />
       </Form>
     </RecorderContainer>
   );
 }
-
 const RecorderContainer = styled.div`
   ${props => props.theme.variables.flex('column', 'center', 'center')}
   width:100%;
@@ -131,13 +117,11 @@ const RecorderContainer = styled.div`
   margin-bottom: 100px;
   margin-left: 264px;
 `;
-
 const Video = styled.video`
   width: 50%;
   border-radius: 20px;
   transform: rotateY(180deg);
 `;
-
 const ButtonContainer = styled.div`
   ${props => props.theme.variables.flex('row', 'center', 'center')}
   margin-top: 25px;
@@ -149,26 +133,22 @@ const ButtonContainer = styled.div`
     height: 40px;
     font-weight: 700;
     cursor: pointer;
-
     &:nth-child(4) {
     }
   }
 `;
-
 const Form = styled.form`
   ${props => props.theme.variables.flex('column', 'center', 'center')}
 `;
-
 const InputContainer = styled.div`
   ${props => props.theme.variables.flex('column', 'center', 'center')}
   margin-top: 20px;
   min-width: 440px;
   width: 33%;
   max-width: 800px;
-  /* border: 1px solid #e5e5e5;
+  /* border: 1px solid #E5E5E5;
   border-radius: 7px; */
 `;
-
 const Button = styled.button`
   border: none;
   border-radius: 10px;
@@ -180,9 +160,7 @@ const Button = styled.button`
   background-color: ${props => props.theme.style.deepGrey};
   color: white;
 `;
-
 const Input = styled.input`
   display: none;
 `;
-
 export default Recorder;
