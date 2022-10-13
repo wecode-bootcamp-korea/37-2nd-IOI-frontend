@@ -1,7 +1,14 @@
 import React from 'react';
+import NavTop from './NavTop';
+import NavBottom from './NavBottom';
 
-function Nav(props) {
-  return <div>Nav</div>;
+function Nav() {
+  return (
+    <>
+      <NavTop />
+      <NavBottom />
+    </>
+  );
 }
 
 export default Nav;
