@@ -2,6 +2,7 @@ import React from 'react';
 import qs from 'qs';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function KakaoLogin() {
   const navigate = useNavigate();
@@ -25,13 +26,13 @@ function KakaoLogin() {
       if (result.status === 200) {
         axios({
           method: 'post',
-          url: 'http://10.58.52.97:3000/auth/kakao-signin',
+          url: `${BASE_URL}/auth/kakao-signin`,
           data: {
             Token: result.data.access_token,
           },
         }).then(result => {
-          localStorage.setItem('Token', 'result.data.accessToken');
-          navigate(`/`);
+          localStorage.setItem('Token', result.data.accessToken);
+          navigate('/?limit=4&offset=0');
         });
       }
     })

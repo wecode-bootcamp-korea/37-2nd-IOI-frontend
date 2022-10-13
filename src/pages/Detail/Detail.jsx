@@ -7,6 +7,7 @@ import Carousel from './component/Carousel';
 import DetailNav from './component/DetailNav';
 import DetailIntro from './component/DetailIntro';
 import DetailAside from './component/DetailAside';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function Detail() {
   const [isLogin, setIsLogin] = useState(false);
@@ -24,20 +25,26 @@ function Detail() {
     content,
   } = lecture;
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Token');
   const params = useParams();
   const classId = params.id;
 
   //172.20.10.7:3000/classes/detail/${classId}
 
   useEffect(() => {
-    fetch(`http://10.58.52.97:3000/classes/detail/${classId}`, {
+    fetch(`${BASE_URL}/classes/detail/${classId}`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
     })
-      .then(response => response.json())
-      .then(result => setLecture(result.classes));
+      .then(response => {
+        console.log('response : ', response);
+        return response.json();
+      })
+      .then(result => {
+        console.log('result : ', result);
+        setLecture(result.classes);
+      });
   }, []);
 
   if (!lecture) return <>loading...</>;
@@ -91,6 +98,7 @@ function Detail() {
         <DetailLeft>
           <DetailNav />
           <DetailIntro
+            classId={classId}
             classTitle={classTitle}
             review_images={review_images}
             image={coverGallery}

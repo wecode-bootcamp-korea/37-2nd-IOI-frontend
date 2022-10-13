@@ -3,7 +3,7 @@ import Lecture from './components/Lecture/Lecture';
 import LectureList from './components/LectureList/LectureList';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 import VIDEOS from './mockData/video';
 import Nav from './components/Nav/Nav';
 
@@ -12,19 +12,26 @@ function LectureVideo() {
   const [selectedLecture, setSelectedLecture] = useState();
   const [lectureList, setLectureList] = useState();
   const [videoId, setVideoId] = useState(searchParams.get('videoId'));
+  const [classId, setClassId] = useState(searchParams.get('classId'));
+
+  console.log('classId : ', classId);
+  console.log('videoId : ', videoId);
+
+  const token = localStorage.getItem('Token');
 
   useEffect(() => {
-    fetch('http://10.58.52.109:3000/video/2', {
+    fetch(`${BASE_URL}/video/${classId}`, {
       method: 'GET',
       headers: {
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+        authorization: token,
       },
     })
       .then(response => {
+        console.log(response);
         return response.json();
       })
       .then(result => {
+        console.log('result : ', result);
         setLectureList(result.video);
       });
   }, []);
@@ -36,6 +43,8 @@ function LectureVideo() {
       }
     });
   }, [videoId, lectureList]);
+
+  console.log('lectureList : ', lectureList);
 
   return (
     <>

@@ -9,6 +9,7 @@ import {
 import Creator from './Creator';
 import Review from './Review';
 import ReviewModal from './ReviewModal';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function DetailIntro({
   image,
@@ -30,6 +31,8 @@ function DetailIntro({
   const [editReviewId, setEditReviewId] = useState();
   const [editUserId, setEditUserId] = useState();
 
+  console.log(classId);
+
   const modalHandler = () => {
     setIsModalOpen(prev => !prev);
   };
@@ -37,7 +40,6 @@ function DetailIntro({
   const editModalHandler = e => {
     setIsEdit(prev => !prev);
     setSelectModal(prev => !prev);
-    console.log('e.currentTarget : ', e.currentTarget);
     const target = Number(e.currentTarget.id);
     setEditReviewId(target);
 
@@ -51,7 +53,7 @@ function DetailIntro({
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.97:3000/review/2?offset=0&limit=1000`)
+    fetch(`${BASE_URL}/review/${classId}?offset=0&limit=1000`)
       .then(response => response.json())
       .then(result => setTotalReview(result.review));
   }, []);
@@ -59,7 +61,7 @@ function DetailIntro({
   // http://10.58.52.97:3000/review/${classId}?offset=${offset}&limit=4
 
   useEffect(() => {
-    fetch(`http://10.58.52.97:3000/review/2?offset=${offset}&limit=4`)
+    fetch(`${BASE_URL}/review/${classId}?offset=${offset}&limit=4`)
       .then(response => response.json())
       .then(result => {
         console.log(result.review);

@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import VideoInfo from './components/VideoInfo';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
+
 function Recorder({ searchParams, setSearchParams }) {
   const preview = useRef();
   const downloader = useRef();
@@ -10,7 +12,7 @@ function Recorder({ searchParams, setSearchParams }) {
   let streamForRecord;
   let recorder;
   let videoFile;
-  const accessToken = localStorage.getItem('token');
+  const accessToken = localStorage.getItem('Token');
   const currentClassId = searchParams.get('classId');
   const currentVideoId = searchParams.get('videoId');
   const navigate = useNavigate();
@@ -54,12 +56,11 @@ function Recorder({ searchParams, setSearchParams }) {
     const videoForm = new FormData(videoRegistForm.current);
     if (currentVideoId) {
       console.log('edit');
-      fetch(`http://10.58.52.97:3000/video?videoId=${currentVideoId}`, {
+      fetch(`${BASE_URL}/video?videoId=${currentVideoId}`, {
         method: 'PATCH',
         headers: {
           enctype: 'multipart/form-data',
-          authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+          authorization: accessToken,
         },
         body: videoForm,
       }).then(response => {
@@ -70,12 +71,11 @@ function Recorder({ searchParams, setSearchParams }) {
       });
     } else {
       console.log('submit');
-      fetch(`http://10.58.52.97:3000/video/`, {
+      fetch(`${BASE_URL}/video/`, {
         method: 'POST',
         headers: {
           enctype: 'multipart/form-data',
-          authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+          authorization: accessToken,
         },
         body: videoForm,
       }).then(response => {

@@ -8,6 +8,7 @@ import variables from './styles/variables';
 import Modal from 'react-modal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <ThemeProvider theme={{ style: theme, variables }}>
     <GlobalStyle />

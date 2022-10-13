@@ -4,19 +4,20 @@ import styled from 'styled-components';
 import VIDEOS from '../../mockData/videoList';
 import { useSearchParams } from 'react-router-dom';
 import Video from './components/Video';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function VideoList() {
   const [videos, setVideos] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const classId = searchParams.get('classId');
+  const token = localStorage.getItem('Token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.97:3000/video/${classId}`, {
+    fetch(`${BASE_URL}/video/${classId}`, {
       method: 'GET',
       headers: {
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+        authorization: token,
       },
     })
       .then(response => response.json())

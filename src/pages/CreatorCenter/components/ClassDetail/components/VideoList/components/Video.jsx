@@ -1,22 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
-function Video({ videos, setVideos, video }) {
+function Video({ videos, setVideos, video, classId }) {
   const navigate = useNavigate();
+  const token = localStorage.getItem('Token');
 
   const goToLectureVideo = () => {
-    navigate(`/lecturevideo?videoId=${video.id}`);
+    navigate(`/lecturevideo?classId=${classId}&videoId=${video.id}`);
   };
 
   const videoDeleter = () => {
     let videosForDelete;
 
-    fetch(`http://10.58.52.97:3000/video?videoId=${video.id}`, {
+    fetch(`${BASE_URL}/video?videoId=${video.id}`, {
       method: 'DELETE',
       headers: {
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+        authorization: token,
       },
     }).then(response => {
       if (response.ok) {

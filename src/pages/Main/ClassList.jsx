@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaHeart } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function ClassList({
   classId,
@@ -16,14 +17,17 @@ function ClassList({
   const Token = localStorage.getItem('Token');
   const [isLike, setIsLike] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
-    likedList.forEach(list => {
-      if (list.classId === classId) {
-        setIsLike(prev => !prev);
-      }
-    });
+    if (likedList !== null) {
+      likedList.forEach(list => {
+        if (list.classId === classId) {
+          setIsLike(prev => !prev);
+        }
+      });
+    }
   }, [likedList]);
+
+  console.log('likedList : ', likedList);
 
   const handleLike = () => {
     if (!Token) {
@@ -31,20 +35,27 @@ function ClassList({
       navigate('/login');
     } else {
       !isLike
-        ? fetch(`http://10.58.52.168:3000/likes/${classId}`, {
+        ? fetch(`${BASE_URL}/likes/${classId}`, {
             method: 'POST',
             headers: {
               authorization: Token,
             },
+          }).then(response => {
+            if (response.statusText === 'Created') {
+              window.location.reload();
+            }
           })
-        : fetch(`http://10.58.52.168:3000/likes/${classId}`, {
+        : fetch(`${BASE_URL}/likes/${classId}`, {
             method: 'DELETE',
             headers: {
               authorization: Token,
             },
+          }).then(response => {
+            if (response.statusText === 'OK') {
+              window.location.reload();
+            }
           });
     }
-    window.location.reload();
   };
 
   return (

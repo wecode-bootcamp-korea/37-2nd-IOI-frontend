@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import ClassListProperty from './components/ClassListProperty';
 import Class from './components/Class';
 import styled from 'styled-components';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 import MOCK from './mockData/classLists';
 
 function ClassList() {
   const [classListArr, setClassListArr] = useState([]);
 
+  const token = localStorage.getItem('Token');
+
   useEffect(() => {
-    fetch(`http://10.58.52.168:3000/classes/`, {
+    fetch(`${BASE_URL}/classes/`, {
       method: 'GET',
       headers: {
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE2NjU1NDkyNTN9.sMNrT8dL5pYAuAKFi3HTPzd9b51xvXJEbZmYANxxrxM',
+        authorization: token,
       },
     })
       .then(response => response.json())

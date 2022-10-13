@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { HiOutlinePhotograph } from 'react-icons/hi';
-// import { BASE_URL } from '../../config';
+import BASE_URL from '/Users/galee/Desktop/FinalIOI/37-2nd-IOI-frontend/src/config.js';
 
 function ReviewModal({
   classId,
@@ -18,6 +18,8 @@ function ReviewModal({
   const [imgSrc, setImgSrc] = useState(registTxt?.image_url);
   const [reviewTxt, setReviewTxt] = useState('');
   const [editTxt, setEditTxt] = useState(registTxt?.content);
+
+  const token = localStorage.getItem('Token');
 
   const previewHandle = e => {
     e.preventDefault();
@@ -46,15 +48,14 @@ function ReviewModal({
 
     const formData = new FormData();
 
-    formData.append('userId', '20');
-    formData.append('classId', '2');
+    formData.append('classId', classId);
     formData.append('image', imgFile);
     formData.append('content', reviewTxt);
 
-    fetch(`http://10.58.52.97:3000/review`, {
+    fetch(`${BASE_URL}/review`, {
       method: 'POST',
       headers: {
-        // Authorization: token,
+        Authorization: token,
         enctype: 'multiple/form-data',
       },
       body: formData,
@@ -78,15 +79,15 @@ function ReviewModal({
 
     const formData = new FormData();
     formData.append('reviewId', editReviewId);
-    formData.append('classId', '2');
+    formData.append('classId', classId);
     formData.append('image', imgFile);
     formData.append('userId', editUserId);
     formData.append('content', editTxt);
 
-    fetch(`http://10.58.52.97:3000/review`, {
+    fetch(`${BASE_URL}/review`, {
       method: 'PATCH',
       headers: {
-        // Authorization: token,
+        Authorization: token,
         enctype: 'multiple/form-data',
       },
       body: formData,
