@@ -1,0 +1,42 @@
+[
+  {
+    "coverImage": "https://cdn.pixabay.com/photo/2022/07/06/13/10/vintage-car-7305109_1280.jpg",
+    "creator" : jadon sancho,
+	  "classTitle" : football,
+	  "like" : 1000,
+	  "price" : 50000,
+	  "userPoint" : 100000,
+  },
+  {
+    "coverImage": "https://cdn.pixabay.com/photo/2022/07/06/13/10/vintage-car-7305109_1280.jpg",
+    "creator" : cristiano ronaldo,
+	  "classTitle" : football,
+	  "like" : 50000,
+	  "price" : 500000,
+	  "userPoint" : 100000,
+  },
+  {
+    "coverImage": "https://cdn.pixabay.com/photo/2022/07/06/13/10/vintage-car-7305109_1280.jpg",
+    "creator" : raphael varane,
+	  "classTitle" : football,
+	  "like" : 3000,
+	  "price" : 70000,
+	  "userPoint" : 100000,
+  },
+  {
+    "coverImage": "https://cdn.pixabay.com/photo/2022/07/06/13/10/vintage-car-7305109_1280.jpg",
+    "creator" : antony,
+	  "classTitle" : football,
+	  "like" : 100000,
+	  "price" : 500000,
+	  "userPoint" : 100000,
+  },
+  {
+    "coverImage": "https://cdn.pixabay.com/photo/2022/07/06/13/10/vintage-car-7305109_1280.jpg",
+    "creator" : de gea,
+	  "classTitle" : football,
+	  "like" : 500,
+	  "price" : 30000,
+	  "userPoint" : 100000
+  }
+]

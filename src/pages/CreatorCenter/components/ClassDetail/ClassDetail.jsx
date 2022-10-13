@@ -6,7 +6,7 @@ import MOCK from '../Main/components/MainContent/components/ClassList/mockData/c
 import ClassRegist from '../ClassRegist/ClassRegist';
 import VideoList from './components/VideoList/VideoList';
 
-function ClassDetail({ currentClassInfo }) {
+function ClassDetail() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentClass, setCurrnetClass] = useState();
 
@@ -14,7 +14,7 @@ function ClassDetail({ currentClassInfo }) {
   const detailFlag = true;
 
   useEffect(() => {
-    fetch(`http://10.58.52.168:3000/classes/admin/8`)
+    fetch(`http://10.58.52.168:3000/classes/admin/${currentClassId}`)
       .then(response => {
         return response.json();
       })
@@ -30,7 +30,7 @@ function ClassDetail({ currentClassInfo }) {
         detailFlag={detailFlag}
         setSearchParams={setSearchParams}
       />
-      <VideoList classId={currentClass?.id} />
+      <VideoList />
     </DetailContainer>
   );
 }

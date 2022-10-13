@@ -22,7 +22,7 @@ function Class({
   index,
   classItem,
   classItem: {
-    id,
+    classId,
     coverImage,
     classTitle,
     mainCategory,
@@ -41,21 +41,23 @@ function Class({
 
   const goToClassDetail = () => {
     searchParams.set('page', 'classDetail');
-    searchParams.set('classId', id);
+    searchParams.set('classId', classId);
     setSearchParams(searchParams);
   };
 
-  const mainCategoryText = mainCategoryTable[mainCategory];
-  const subCategoryText = subCategoryTable[subCategory];
+  const date = createdAt.split('T');
+  const date1 = date[0];
+  const date2 = date[1].split('.')[0];
+  const dateForOutput = date1 + ' ' + date2;
 
   return (
     <ClassContainer>
       <input type="checkbox" />
       <Image src={coverImage} alt="강의커버이미지" onClick={goToClassDetail} />
       <Property onClick={goToClassDetail}>{classTitle}</Property>
-      <Property onClick={goToClassDetail}>{mainCategoryText}</Property>
-      <Property onClick={goToClassDetail}>{subCategoryText}</Property>
-      <Property onClick={goToClassDetail}>{createdAt}</Property>
+      <Property onClick={goToClassDetail}>{mainCategory}</Property>
+      <Property onClick={goToClassDetail}>{subCategory}</Property>
+      <Property onClick={goToClassDetail}>{dateForOutput}</Property>
       <DeleteButton onClick={classDeleter}>삭제</DeleteButton>
     </ClassContainer>
   );

@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import InputForm from '../../ClassRegist/components/InputForm';
 import VIDEO_INFO_LIST from '../constData/VIDEO_INFO_LIST';
 
-function VideoInfo({ title, classInfo, setClassInfo, recordingFlag }) {
+function VideoInfo({
+  title,
+  classInfo,
+  setClassInfo,
+  recordingFlag,
+  currentVideoId,
+}) {
   return (
     <InfoContainer>
       <InfoTitle>{title}</InfoTitle>
@@ -20,6 +26,7 @@ function VideoInfo({ title, classInfo, setClassInfo, recordingFlag }) {
               classInfo={classInfo}
               setClassInfo={setClassInfo}
               recordingFlag={recordingFlag}
+              currentVideoId={currentVideoId}
             />
           );
         }

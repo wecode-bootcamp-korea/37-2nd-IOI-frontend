@@ -9,27 +9,42 @@ function ClassList() {
   const [classListArr, setClassListArr] = useState([]);
 
   useEffect(() => {
-    // fetch(`http://10.58.52.168:3000/classes/`, {
-    //   method: 'GET',
-    //   headers: {
-    //     authorization:
-    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0OTQ1ODV9.X8fUzjG8qfteilbZLl2S2Kzl9neM_wjL3zr6qRQSHT8',
-    //   },
-    // })
-    //   .then(response => response.json())
-    //   .then(result => {
-    //     console.log('result', result);
-    //     setClassListArr(result);
-    //   });
-    setClassListArr(MOCK);
-  }, [classListArr]);
+    fetch(`http://10.58.52.168:3000/classes/`, {
+      method: 'GET',
+      headers: {
+        authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE2NjU1NDkyNTN9.sMNrT8dL5pYAuAKFi3HTPzd9b51xvXJEbZmYANxxrxM',
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        const acc = [];
+        result.classes.map(item => {
+          if (acc.length !== 0) {
+            acc.every((accs, index) => {
+              if (item.classId < accs.classId) {
+                acc.splice(index, 0, item);
+                return false;
+              }
+              return true;
+            });
+          } else if (acc.length === 0) {
+            acc.push(item);
+          }
+        });
+        setClassListArr(acc);
+      });
+  }, []);
+
+  console.log('classListArr : ', classListArr);
+
   return (
     <ClassListContainer>
       <ClassListProperty />
       {classListArr?.map((classItem, index) => {
         return (
           <Class
-            key={classItem.id}
+            key={classItem.classId}
             index={index}
             id={classItem.id}
             classItem={classItem}

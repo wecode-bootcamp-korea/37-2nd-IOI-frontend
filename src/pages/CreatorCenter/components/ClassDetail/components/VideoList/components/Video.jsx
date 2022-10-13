@@ -12,8 +12,7 @@ function Video({ videos, setVideos, video }) {
   const videoDeleter = () => {
     let videosForDelete;
 
-    alert(video.id);
-    fetch(`http://10.58.52.179:3000/video?videoId=${video.id}`, {
+    fetch(`http://10.58.52.97:3000/video?videoId=${video.id}`, {
       method: 'DELETE',
       headers: {
         authorization:
@@ -21,18 +20,19 @@ function Video({ videos, setVideos, video }) {
       },
     }).then(response => {
       if (response.ok) {
+        alert(`${video.videoTitle} 가 삭제되었습니다.`);
         videosForDelete = videos.filter(item => {
-          console.log('item.id: ', item.id);
-          console.log('video.id : ', video.id);
-          console.log(
-            'Number(item.id) !== Number(video.id) :',
-            Number(item.id) !== Number(video.id)
-          );
           return Number(item.id) !== Number(video.id);
         });
       }
       setVideos([...videosForDelete]);
     });
+  };
+
+  const videoEditer = () => {
+    navigate(
+      `/creatorcenter?page=recorder&classId=${video.class_id}&videoId=${video.id}`
+    );
   };
 
   return (
@@ -42,6 +42,7 @@ function Video({ videos, setVideos, video }) {
         강의 설명: {video.videoDescription}
       </Description>
       <Button onClick={videoDeleter}>delete</Button>
+      <Button onClick={videoEditer}>edit</Button>
     </VideoContatiner>
   );
 }
@@ -63,10 +64,12 @@ const Description = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top: 5px;
+  margin: 15px 15px 0 0;
   border: none;
   background-color: ${props => props.theme.style.middleGray};
   height: 25px;
+  font-weight: 700;
+  color: gray;
   cursor: pointer;
 `;
 

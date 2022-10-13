@@ -18,6 +18,7 @@ const AsideContainor = styled.aside`
   top: 80px;
   width: 264px;
   height: 100vh;
+  background-color: white;
   border-right: 1px solid #e5e5e5;
 `;
 
