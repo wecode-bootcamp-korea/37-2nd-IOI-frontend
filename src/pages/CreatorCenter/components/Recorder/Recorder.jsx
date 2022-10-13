@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import styled from 'styled-components';
 import VideoInfo from './components/VideoInfo';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +14,10 @@ function Recorder({ searchParams, setSearchParams }) {
 
   const accessToken = localStorage.getItem('token');
   const currentClassId = searchParams.get('classId');
+  const currentVideoId = searchParams.get('videoId');
   const navigate = useNavigate();
+
+  console.log('currentVideoId : ', currentVideoId);
 
   navigator.mediaDevices
     .getUserMedia({
@@ -49,16 +51,6 @@ function Recorder({ searchParams, setSearchParams }) {
   };
 
   const recordDownloader = async () => {
-    const ffmpeg = createFFmpeg({
-      log: true,
-    });
-    // await ffmpeg.load();
-    // ffmpeg.FS('writeFile', 'recording.webm', await fetchFile(videoFile));
-    // await ffmpeg.run('-i', 'recording.webm', 'r', '60', 'output.mp4');
-
-    // const mp4File = ffmpeg.FS('readFile', 'output.mp4');
-    // const mp4Blob = new Blob([mp4File.buffer], { type: 'video/mp4' });
-
     const a = document.createElement('a');
     a.href = videoFile;
     a.download = 'downloadVideo.webm';
@@ -71,26 +63,38 @@ function Recorder({ searchParams, setSearchParams }) {
 
     const videoForm = new FormData(videoRegistForm.current);
 
-    for (let key of videoForm.keys()) {
-      console.log('key : ', key);
+    if (currentVideoId) {
+      console.log('edit');
+      fetch(`http://10.58.52.97:3000/video?videoId=${currentVideoId}`, {
+        method: 'PATCH',
+        headers: {
+          enctype: 'multipart/form-data',
+          authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+        },
+        body: videoForm,
+      }).then(response => {
+        console.log(response);
+        if (response.ok) {
+          navigate(`?page=classDetail&classId=${currentClassId}`);
+        }
+      });
+    } else {
+      console.log('submit');
+      fetch(`http://10.58.52.97:3000/video/`, {
+        method: 'POST',
+        headers: {
+          enctype: 'multipart/form-data',
+          authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+        },
+        body: videoForm,
+      }).then(response => {
+        if (response.ok) {
+          navigate(`?page=classDetail&classId=${currentClassId}`);
+        }
+      });
     }
-    for (let value of videoForm.values()) {
-      console.log('value : ', value);
-    }
-
-    fetch(`http://10.58.52.179:3000/video/upload`, {
-      method: 'POST',
-      headers: {
-        enctype: 'multipart/form-data',
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
-      },
-      body: videoForm,
-    }).then(response => {
-      if (response.ok) {
-        navigate(`?page=classDetail&classId=${currentClassId}`);
-      }
-    });
   };
 
   return (
@@ -105,12 +109,16 @@ function Recorder({ searchParams, setSearchParams }) {
       </ButtonContainer>
       <Form ref={videoRegistForm}>
         <Button onClick={lectureSubmit}>
-          Submit
+          {currentVideoId ? 'Edit' : 'Submit'}
           <br /> Lecture
         </Button>
-        <VideoInfo recordingFlag={recordingFlag} />
+        <VideoInfo
+          currentVideoId={currentVideoId}
+          recordingFlag={recordingFlag}
+        />
 
-        <Input name="classId" defaultValue={2} />
+        <Input name="classId" defaultValue={currentClassId} />
+        <Input name="videoId" defaultValue={currentVideoId} />
       </Form>
     </RecorderContainer>
   );

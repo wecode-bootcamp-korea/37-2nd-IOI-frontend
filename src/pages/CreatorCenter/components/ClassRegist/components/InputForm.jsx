@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ClassInfo from './ClassBasicInfo';
+import { useSearchParams } from 'react-router-dom';
 function InputForm({
   type,
   title,
@@ -13,7 +14,36 @@ function InputForm({
   recordingFlag,
   currentClass,
   detailFlag,
+  currentVideoId,
 }) {
+  const [currentVideo, setCurrentVideo] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const classId = searchParams.get('classId');
+
+  useEffect(() => {
+    if (detailFlag) {
+      fetch(`http://10.58.52.97:3000/video/${classId}`, {
+        method: 'GET',
+        headers: {
+          authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NjU0MDA3Mjh9.fJounHh1M4DEboDn_UHqM8O0Qgu3v3iRzhtv_mrCa0Y',
+        },
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(result => {
+          console.log('resultVideo : ', result.video);
+          const videos = result.video;
+
+          let currentvideo = videos.filter(
+            video => video.id === Number(currentVideoId)
+          );
+          setCurrentVideo(currentvideo[0]);
+        });
+    }
+  }, []);
   const classInfoSetter = event => {
     classInfo[title] = event.target.value;
     setClassInfo({ ...classInfo });
@@ -231,9 +261,12 @@ function InputForm({
         <Input
           name={title}
           onChange={recordingFlag ? null : classInfoSetter}
-          // value={classInfo[title]}
           defaultValue={
-            detailFlag && currentClass ? currentClass[title] : ClassInfo[title]
+            detailFlag && currentClass
+              ? currentClass[title]
+              : currentVideoId
+              ? currentVideo?.[title]
+              : ClassInfo[title]
           }
           multiple={isMultiple}
           type={type}
