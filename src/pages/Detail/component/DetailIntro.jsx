@@ -252,7 +252,7 @@ function DetailIntro({
           환불 정책에 따라 구매일로부터 90일까지 환불 요청이 가능하며, 7일 까지
           전액 환불이 가능합니다.
         </RefundTxt>
-        <SeeMoreBtn>전체 환불 정책 보기 ></SeeMoreBtn>
+        <SeeMoreBtn>전체 환불 정책 보기</SeeMoreBtn>
       </RefundBox>
       <Line />
     </>

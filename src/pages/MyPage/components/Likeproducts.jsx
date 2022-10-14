@@ -1,11 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Likeproducts({ likeList }) {
   console.log('e : ', likeList);
 
+  const navigate = useNavigate();
+
+  const goToDetail = () => {
+    navigate(`/classes/detail/${likeList.classId}`);
+  };
+
   return (
-    <Products>
+    <Products onClick={goToDetail}>
       <ThumbBox>
         <Thumb src={likeList?.thumbnail_image} alt="썸네일" />
       </ThumbBox>
@@ -23,6 +30,7 @@ const Products = styled.div`
   width: 300px;
   margin-bottom: 20px;
   line-height: 1.4em;
+  cursor: pointer;
 `;
 
 const ThumbBox = styled.div`

@@ -1,11 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import variables from '../../../../styles/variables';
 
 function Nav() {
+  const navigate = useNavigate();
+
+  const goToDetail = () => {
+    navigate(`/`);
+  };
+
   return (
     <NavContainer>
-      <Title>CLASS IOI +</Title>
+      <Title onClick={goToDetail}>CLASS IOI +</Title>
       <Icon src="https://cdn-icons-png.flaticon.com/512/709/709424.png" />
     </NavContainer>
   );
@@ -22,6 +29,7 @@ const NavContainer = styled.div`
   padding-right: 30px;
   background-color: black;
   color: white;
+  cursor: pointer;
 `;
 
 const Title = styled.div`

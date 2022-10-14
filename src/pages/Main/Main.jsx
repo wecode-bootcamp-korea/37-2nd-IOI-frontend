@@ -19,7 +19,7 @@ function Main() {
   const [likedList, setLikedList] = useState([]);
 
   const fetchURL = searchParams.toString();
-  const LIMIT = 4;
+  const LIMIT = 12;
 
   useEffect(() => {
     searchParams.set('limit', LIMIT);

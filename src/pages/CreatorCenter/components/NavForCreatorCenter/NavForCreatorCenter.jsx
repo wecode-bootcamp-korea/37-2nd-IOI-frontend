@@ -5,7 +5,10 @@ import styled from 'styled-components';
 function NavForCreatorCenter() {
   return (
     <NavContainor>
-      <Linc href="/creatorcenter">IOI Creator Center</Linc>
+      <Linc>
+        <Linc href="/">IOI</Linc>{' '}
+        <Linc href="/creatorcenter">Creator Center</Linc>
+      </Linc>
       <Icon src="https://cdn-icons-png.flaticon.com/512/709/709424.png" />
     </NavContainor>
   );
