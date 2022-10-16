@@ -94,8 +94,6 @@ function DetailIntro({
     setOffset(currentPage * 4);
   };
 
-  // API주소/review/classId=${classId}&reviewId=${Number(e.target.id)}
-
   const deleteBtn = e => {
     e.preventDefault();
     fetch(`http://10.58.52.97:3000/review?classId=2&reviewId=${e.target.id}`, {
@@ -107,7 +105,6 @@ function DetailIntro({
     })
       .then(response => response.json())
       .then(result => {
-        // console.log(result);
         let reviewsForCopy = [];
         for (let i = 0; i < 4; i++) {
           reviewsForCopy.push(result.review[i]);
