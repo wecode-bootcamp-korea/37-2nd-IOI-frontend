@@ -30,18 +30,15 @@
 > Back-End : My SQL, Node.js
 > Common : RESTful API
 
-### **담당 부분**
+### **구현 기능**
 
+- 카카오 소셜로그인(REST API)
+- 메인페이지
+- 크리에이터 센터
 - 상세페이지
-    - react-slick을 이용한 슬라이드 구현
-    - CSS Position Sticky 으로 서브 메뉴바 상단 고정
-    - 모달창을 이용해 후기 등록 구현
-    - FileReader를 이용해 등록한 이미지 프리뷰 구현
-    - 폼데이터 전송으로 후기 등록
-    - 후기 등록/수정 모달창 재사용
-    - clipboard로 현재 링크 복사하기
-    - 좋아요 버튼 클릭시 숫자 증감
+- 구독페이지
 - 결제페이지
+
     
 ## **Reference**
     
